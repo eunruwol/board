@@ -10,6 +10,7 @@
 		<typeAlias type="kr.or.ddit.board.model.BoardVo" alias="boardVo" />
 		<typeAlias type="kr.or.ddit.post.model.PostVo" alias="postVo" />
 		<typeAlias type="kr.or.ddit.file.model.FileVo" alias="fileVo" />
+		<typeAlias type="kr.or.ddit.comment.model.CommentVo" alias="commentVo" />
 	</typeAliases>
 
 
@@ -31,5 +32,6 @@
 		<mapper resource="kr/or/ddit/db/board.xml" />
 		<mapper resource="kr/or/ddit/db/post.xml" />
 		<mapper resource="kr/or/ddit/db/file.xml" />
+		<mapper resource="kr/or/ddit/db/comment.xml" />
 	</mappers>
 </configuration>

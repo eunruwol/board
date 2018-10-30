@@ -48,7 +48,7 @@ public class PostListServlet extends HttpServlet {
 		PostServiceInf postService = new PostService();
 		Map<String, Object> resultMap = postService.getPostPageList(paramMap);
 		
-		List<PostVo> postList = (List<PostVo>)resultMap.get("pageList");
+		List<PostVo> postList = (List<PostVo>) resultMap.get("pageList");
 		request.setAttribute("postList", postList);
 		
 		// 페이지 네비게이션 문자열

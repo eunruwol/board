@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.post.model.PostVo"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -7,7 +9,7 @@
 <style type="text/css">
 .board_create_container {
 	box-sizing:border-box;
-	width:70%;
+	width:1000px;
 	height:auto;
 	float:left;
 	margin-top:1px;	
@@ -23,15 +25,36 @@
 	border-collapse:collapse;
 	width:100%;
 }
-
+.table_striped{width:1000px;font-size:20px;}
+.table_striped > thead > tr {
+	background-color:#4286f4;color:#fff;padding:20px 0px 20px 0px;font-size:20px;font-weight:bold;
+	vertical-align:middle;text-align:center;
+}
+.table_striped > tbody > tr {
+	cursor:pointer;transition:0.5s;
+}
+.table_striped > tbody > tr:hover {
+	transition:0.5s;background-color:#4286f4;color:#fff;
+}
 .table_responsive > .table_striped > thead > tr > td {
-	border:1px solid rgba(128, 128, 128, 0.3);
 	padding:5px;
 }
 .table_responsive > .table_striped > tbody > tr > td {
-	border:1px solid rgba(128, 128, 128, 0.3);
 	padding:5px;
 }
+.datetypetable{text-align:center;border-bottom:1px solid rgba(128,128,128,0.3);}
+.numbertd{text-align:center;border-bottom:1px solid rgba(128,128,128,0.3);}
+.titletd{text-indent:10px;border-bottom:1px solid rgba(128,128,128,0.3);}
+.writergogo{text-align:center;border-bottom:1px solid rgba(128,128,128,0.3);}
+.table_close{background-color:#eee;}
+.designNewBoardButtonForm{margin-left:20px;width:1000px;}
+.newBoardButton {
+	float:right;width:90px;height:37px;background-color:#4286f4;color:#fff;font-size:16px;border:none;border-radius:5px;
+	font-weight:bold;cursor:pointer;
+}
+.textCenter{width:1000px;text-align:center;height:auto;}
+.textCenter > .pagination > li {display:inline-block;padding:0px 15px 0px 15px;margin-top:30px;font-size:20px;font-weight:bold;}
+.textCenter > .pagination > li > a{text-decoration:none;color:#4286f4}
 </style>
 
 <div class="all_container">
@@ -58,23 +81,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<% request.setAttribute("nbsp", " "); %>
 					<c:forEach items="${postList}" var="post" varStatus="status">
 						<c:choose>
 							<c:when test="${post.post_del == 'N'}">
 								<tr data-id="${post.post_no}">
-									<td>${status.index+1}</td>
-									<td>${fn:replace(post.post_tit, nbsp, '&nbsp;')}</td>
-									<td>${post.userId}</td>
-									<td><fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /></td>
+									<td class="numbertd">${status.index+1}</td>
+									<td class="titletd">${fn:replace(post.post_tit, nbsp, '&nbsp;')}</td>
+									<td class="writergogo">${post.userId}</td>
+									<td class="datetypetable"><fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /></td>
 								</tr>
 							</c:when>
 							<c:when test="${post.post_del == 'Y'}">
 								<tr class="table_close">
-									<td>${status.index+1}</td>
-									<td>삭제된 게시글 입니다.</td>
-									<td>${post.userId}</td>
-									<td><fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /></td>
+									<td class="numbertd">${status.index+1}</td>
+									<td class="titletd">삭제된 게시글 입니다.</td>
+									<td class="writergogo">${post.userId}</td>
+									<td class="datetypetable"><fmt:formatDate value="${post.post_date}" pattern="yyyy-MM-dd" /></td>
+								</tr>
+							</c:when>
+							<c:when test="${postList == null}">
+								<tr class="table_close">
+									<td colspan="4">게시글이 없습니다.</td>
 								</tr>
 							</c:when>
 						</c:choose>
@@ -96,10 +123,10 @@
 			</script>
 		</div>
 		
-		<form id="postInsertBtn" action="/postInsert" method="get">
+		<form id="postInsertBtn" action="/postInsert" method="get" class="designNewBoardButtonForm">
 			<input type="hidden" name="board_id" value="${boardVo.board_id}" />
 			<input type="hidden" name="userId" value="${userVo.userId}" />
-			<button type="submit">새글쓰기</button>
+			<button type="submit" class="newBoardButton">새글쓰기</button>
 		</form>
 		
 		<div class="textCenter">
@@ -109,5 +136,4 @@
 		</div>
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="../bottom.jsp" %>

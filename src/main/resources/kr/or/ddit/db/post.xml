@@ -10,7 +10,7 @@
 		SELECT	a.*, ROWNUM rn
 		FROM	(
 			SELECT	POST_NO
-				,	LPAD('└  ', (LEVEL-1)*4, ' ') || POST_TIT
+				,	LPAD('└  ', (LEVEL-1)*4, ' ') || POST_TIT AS POST_TIT
 				,	PNO
 				,	POST_DEL
 				,	(
@@ -39,17 +39,14 @@
 	
 	<!-- 게시글 상세 조회 -->
 	<select id="getPost" parameterType="Integer" resultType="postVo">
-		SELECT	a.*
-		FROM	(
-			SELECT	p.*
-				,	(
-					SELECT	USERID
-					FROM	JSPUSER
-					WHERE	USERID = p.USERID
-				) AS USERID
-			FROM	POSTS p
-		) a
-		WHERE	POST_NO = #{post_no}
+		SELECT	p.*
+			,	(
+				SELECT	USERID
+				FROM	JSPUSER
+				WHERE	USERID = p.USERID
+	    	) AS USERID
+	    FROM	POSTS p
+	    WHERE	POST_NO = #{post_no}
 	</select>
 	
 	<!-- 게시글 등록 -->
@@ -78,10 +75,52 @@
 	<!-- 게시글 번호 조회 -->
 	<select id="selectPostNum" parameterType="postVo" resultType="Integer">
 		SELECT	POST_NO
-			,	POSTS
+		FROM	POSTS
 		WHERE	BOARD_ID = #{board_id}
 		AND		POST_TIT = #{post_tit}
 		AND		USERID	 = #{userId}
 	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="updatePost" parameterType="postVo">
+		UPDATE	POSTS
+		SET		POST_TIT	= #{post_tit}
+			,	POST_CON	= #{post_con}
+			,	POST_DATE	= sysdate
+		WHERE	POST_NO		= #{post_no}
+	</update>
+	
+	<!-- 게시글 삭제(삭제여부만 update) -->
+	<update id="deletePost" parameterType="Integer">
+		UPDATE	POSTS
+		SET		POST_DEL	= 'Y'
+		WHERE	POST_NO		= #{post_no}
+	</update>
+	
+	<!-- 답글 등록 -->
+	<insert id="insertAnswerPost" parameterType="postVo">
+		INSERT INTO POSTS (
+				POST_NO
+			,	BOARD_ID
+			,	PNO
+			,	GNO
+			,	POST_TIT
+			,	POST_CON
+			,	POST_DATE
+			,	POST_DEL
+			,	USERID
+		)
+		VALUES (
+				POST_NO_SEQ.NEXTVAL
+			,	#{board_id}
+			,	#{pno}
+			,	#{gno}
+			,	#{post_tit}
+			,	#{post_con}
+			,	sysdate
+			,	'N'
+			,	#{userId}
+		)
+	</insert>
 	
 </mapper>

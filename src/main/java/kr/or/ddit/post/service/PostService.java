@@ -123,4 +123,43 @@ public class PostService implements PostServiceInf {
 	public int selectPostNum(PostVo postVo) {
 		return postDao.selectPostNum(postVo);
 	}
+	
+	/**
+	* Method : updatePost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 수정
+	*/
+	@Override
+	public int updatePost(PostVo postVo) {
+		return postDao.updatePost(postVo);
+	}
+
+	/**
+	* Method : deletePost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param post_no
+	* @return
+	* Method 설명 : 게시글 삭제 (삭제여부만)
+	*/
+	@Override
+	public int deletePost(int post_no) {
+		return postDao.deletePost(post_no);
+	}
+	
+	/**
+	* Method : insertAnswerPost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 답글 등록
+	 */
+	@Override
+	public int insertAnswerPost(PostVo postVo) {
+		return postDao.insertAnswerPost(postVo);
+	}
 }

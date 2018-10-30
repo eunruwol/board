@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 			
 			request.setAttribute("boardList", boardList);
 			
-			request.getRequestDispatcher("main.jsp").forward(request, response);
+			request.getRequestDispatcher("mains.jsp").forward(request, response);
 		}else{
 			response.sendRedirect("/index.jsp");
 		}

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,8 +13,8 @@
 <link href="css/main.css" rel="stylesheet">
 <style type="text/css">
 .all_container {
-	width:100%;
-	height:auto;
+	width:1300px;
+	min-width:1000px;
 	padding-top:50px;
 }
 </style>
@@ -28,7 +29,11 @@
 	<div class="header_right">
 		<h4>
 			<c:if test="${userVo.name != null}">
-				<span class="highright">${userVo.name}</span> 님 안녕하세요
+				<fmt:bundle basename="kr.or.ddit.resource.msg.msg">
+					<fmt:message key="visitor">
+						<fmt:param value="${userVo.name}"></fmt:param>
+					</fmt:message>
+				</fmt:bundle>
 			</c:if>
 		</h4>
 		<div class="logout">

@@ -56,4 +56,34 @@ public interface PostDaoInf {
 	* Method 설명 : 게시글 번호 조회
 	 */
 	int selectPostNum(PostVo postVo);
+	
+	/**
+	* Method : updatePost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	int updatePost(PostVo postVo);
+	
+	/**
+	* Method : deletePost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param post_no
+	* @return
+	* Method 설명 : 게시글 삭제 (삭제여부만)
+	 */
+	int deletePost(int post_no);
+	
+	/**
+	* Method : insertAnswerPost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 답글 등록
+	 */
+	int insertAnswerPost(PostVo postVo);
 }

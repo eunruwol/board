@@ -112,5 +112,4 @@
 		</c:forEach>
 	</div>
 </div>
-</body>
-</html>
+<%@ include file="../bottom.jsp" %>

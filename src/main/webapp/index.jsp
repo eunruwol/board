@@ -12,11 +12,6 @@
 <style type="text/css">
 body{background-color:#f2f2f2;font-family:'Lato', sans-serif}
 .wrap{width:500px;height:800px;margin:100px auto;}
-.title{width:500px;height:100px;margin:0 auto;}
-.title > h2 {
-	font-size:30px;letter-spacing:1px;font-weight:normal;text-align:center;
-	line-height:100px;color:#4286f4;
-}
 .loginchk {
 	display:block;float:left;width:30px;height:30px;
 	outline:none;border:none;border:1px solid #4286f4;
@@ -41,6 +36,42 @@ body{background-color:#f2f2f2;font-family:'Lato', sans-serif}
 	background-color:#4286f4;color:#fff;border:none;margin-top:40px;
 	font-size:20px;cursor:pointer;
 	border-radius:10px 0px 10px 0px;
+}
+.drawsvg,svg{width:100%;font-size:100px;}
+.stroke {
+	stroke:#4286f4;stroke-width:1px;stroke-dasharray:0 250;
+	stroke-opacity:0;fill:none;-webkit-animation:stroke_offset 5s infinite;
+	animation:stroke_offset 5s infinite;
+	-webkit-animation-timing-function:cubic-bezier(.25, .46, .45, .94);
+	animation-timing-function: cubic-bezier(.25, .46, .45, .94)
+}
+
+@-webkit-keyframes stroke_offset {
+	100%, 25% {stroke-dasharray: 0 250; stroke-opacity: 1 }
+	50%, 75% {stroke-dasharray: 250 0; stroke-opacity: .75 }
+	55%, 70% {stroke-dasharray: 250 0; stroke-opacity: 0 }
+}
+
+@keyframes stroke_offset {
+	100%, 25% {stroke-dasharray: 0 250; stroke-opacity: 1 }
+	50%, 75% {stroke-dasharray: 250 0; stroke-opacity: .75 }
+	55%, 70% {stroke-dasharray: 250 0; stroke-opacity: 0 }
+}
+.fill {
+	fill: #4286f4; fill-opacity: 0; -webkit-animation: fill_offset 5s infinite;
+	animation: fill_offset 5s infinite;
+	-webkit-animation-timing-function: cubic-bezier(.25, .46, .45, .94);
+	animation-timing-function: cubic-bezier(.25, .46, .45, .94)
+}
+
+@-webkit-keyframes fill_offset {
+	100%, 25%, 35%, 90% { fill-opacity: 0 }
+	50%, 70% { fill-opacity: 1 }
+}
+
+@keyframes fill_offset {
+	100%, 25%, 35%, 90% { fill-opacity: 0 }
+	50%, 70% { fill-opacity: 1 }
 }
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -75,8 +106,17 @@ $(document).ready(function(){
 <body>
 <form action="/iksLogin" method="post">
 <div class="wrap">
-	<div class="title">
-		<h2>IKS BOARD</h2>
+	<div class="drawsvg">
+		<svg version="1.1" viewBox="0 0 700 100" class="svgWitch">
+			<symbol id="fade-text">
+				<text x="50%" y="80%" text-anchor="middle">IKS BOARD</text>
+			</symbol>
+			
+			<g>
+				<use class="stroke" xlink:href="#fade-text"/>
+				<use class="fill" xlink:href="#fade-text"/>
+			</g>
+		</svg>
 	</div>
 	
 	<div class="container">

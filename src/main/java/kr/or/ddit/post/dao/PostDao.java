@@ -97,4 +97,58 @@ public class PostDao implements PostDaoInf {
 		
 		return post_no;
 	}
+	
+	/**
+	* Method : updatePost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 수정
+	 */
+	@Override
+	public int updatePost(PostVo postVo) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int updateCnt = session.update("post.updatePost", postVo);
+		session.commit();
+		session.close();
+		
+		return updateCnt;
+	}
+	
+	/**
+	* Method : deletePost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param post_no
+	* @return
+	* Method 설명 : 게시글 삭제 (삭제여부만)
+	 */
+	@Override
+	public int deletePost(int post_no) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int delCnt = session.update("post.deletePost", post_no);
+		session.commit();
+		session.close();
+		
+		return delCnt;
+	}
+	
+	/**
+	* Method : insertAnswerPost
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 답글 등록
+	 */
+	@Override
+	public int insertAnswerPost(PostVo postVo) {
+		SqlSession session = sqlSessionFactory.openSession();
+		int insertCnt = session.insert("post.insertAnswerPost", postVo);
+		session.commit();
+		session.close();
+		
+		return insertCnt;
+	}
 }
